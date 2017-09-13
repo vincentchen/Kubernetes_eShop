@@ -10,4 +10,4 @@ COPY application.yml /opt/app/eshop_service/
 
 EXPOSE 8035
 
-ENTRYPOINT sh  /opt/app/eshop_service/start.sh
+ENTRYPOINT sh /opt/app/eshop_service/start.sh

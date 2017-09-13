@@ -1,5 +1,7 @@
 FROM docker.io/anapsix/alpine-java
 
+WORKDIR /opt/app/eshop_service/
+
 COPY eshop_k8s_auth_service.jar /opt/app/eshop_service/
 
 ADD start.sh /opt/app/eshop_service/

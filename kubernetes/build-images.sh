@@ -2,7 +2,7 @@
 
 cd ..
 
-#mvn package -DskipTests -Djar
+mvn package -DskipTests -Djar
 
 cd kubernetes
 
