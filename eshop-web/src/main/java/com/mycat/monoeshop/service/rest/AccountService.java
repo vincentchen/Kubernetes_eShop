@@ -1,7 +1,6 @@
 package com.mycat.monoeshop.service.rest;
 
 import com.mycat.monoeshop.model.Account;
-
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
@@ -13,7 +12,6 @@ import feign.RequestLine;
  * @author: Leader us
  */
 public interface AccountService {
-
 	@Headers({ "Content-Type: application/json" })
 	@RequestLine("POST /account/login?username={username}&password={password}")
 	Account login(@Param("username") String username, @Param("password") String password);

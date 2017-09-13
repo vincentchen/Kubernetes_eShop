@@ -1,24 +1,22 @@
 package com.mycat.monoeshop.service.rest;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.mycat.monoeshop.model.*;
+import feign.Request;
+import feign.hystrix.HystrixFeign;
+import feign.jackson.JacksonDecoder;
+import feign.jackson.JacksonEncoder;
+import feign.jaxb.JAXBContextFactory;
+import feign.jaxb.JAXBDecoder;
+import feign.jaxb.JAXBEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.mycat.monoeshop.model.Account;
-import com.mycat.monoeshop.model.CartRecord;
-import com.mycat.monoeshop.model.Product;
-import com.mycat.monoeshop.model.Result;
-import com.mycat.monoeshop.model.ResultEnum;
 
-import feign.Request;
-import feign.hystrix.HystrixFeign;
-import feign.jackson.JacksonDecoder;
-import feign.jackson.JacksonEncoder;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Desc:
@@ -39,7 +37,6 @@ public class FeignConfig {
 	@Bean
 	public AccountService accountService() {
 		return buildFeignClient(accountrestServiceUrl, AccountService.class, new AccountService() {
-
 			@Override
 			public Account login(String username, String password) {
 				LOGGER.warn("Hystrix occured: login ");
@@ -51,7 +48,6 @@ public class FeignConfig {
 	@Bean
 	public CartService cartService() {
 		return buildFeignClient(cartrestServiceUrl, CartService.class, new CartService() {
-
 			@Override
 			public List<CartRecord> getProductsByUsername(String username) {
 				LOGGER.warn("Hystrix occured :getProductsByUsername");
@@ -70,14 +66,12 @@ public class FeignConfig {
 				LOGGER.warn("Hystrix occured :addProductToCart");
 				return new Result<String>(ResultEnum.ERROR);
 			}
-
 		});
 	}
 
 	@Bean
 	public ProductService productService() {
 		return buildFeignClient(productrestServiceUrl, ProductService.class, new ProductService() {
-
 			@Override
 			public List<Product> getProducts() {
 				LOGGER.warn("Hystrix occured: getProducts");
@@ -96,7 +90,6 @@ public class FeignConfig {
 				LOGGER.warn("Hystrix occured: getProductById");
 				return null;
 			}
-
 		});
 	}
 
@@ -105,7 +98,13 @@ public class FeignConfig {
 		T result = HystrixFeign.builder().encoder(new JacksonEncoder()).decoder(new JacksonDecoder()).options(options)
 				.target(service, restPath, fallback);
 		return result;
-
 	}
 
+	private <T> T buildFeignClient2(String restPath, Class<T> service, T fallback) {
+		JAXBContextFactory contextFactory = new JAXBContextFactory.Builder().build();
+		Request.Options options = new Request.Options(5000, 10000);
+		T result = HystrixFeign.builder().encoder(new JAXBEncoder(contextFactory)).decoder(new JAXBDecoder(contextFactory)).options(options)
+				.target(service, restPath, fallback);
+		return result;
+	}
 }

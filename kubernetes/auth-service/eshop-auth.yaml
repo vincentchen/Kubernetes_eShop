@@ -28,7 +28,7 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: eshop-auth-image:v1
+      - image: gcr.io/library/eshop-auth-image
         name: eshop-auth
         env:
         - name: DB_PASSWORD

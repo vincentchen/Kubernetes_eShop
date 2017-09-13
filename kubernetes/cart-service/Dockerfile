@@ -8,6 +8,6 @@ ADD start.sh /opt/app/eshop_service/
 
 COPY application.yml /opt/app/eshop_service/
 
-EXPOSE 8034
+EXPOSE 8035
 
-ENTRYPOINT /opt/app/eshop_service/start.sh
+ENTRYPOINT sh  /opt/app/eshop_service/start.sh

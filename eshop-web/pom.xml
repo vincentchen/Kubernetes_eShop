@@ -49,6 +49,11 @@
 			<artifactId>feign-jackson</artifactId>
 			<version>${openfeign.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-jaxb</artifactId>
+			<version>${openfeign.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

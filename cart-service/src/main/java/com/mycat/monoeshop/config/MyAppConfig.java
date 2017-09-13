@@ -1,11 +1,8 @@
 package com.mycat.monoeshop.config;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import javax.sql.DataSource;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +30,6 @@ public class MyAppConfig extends CachingConfigurerSupport {
 		// 设置缓存过期时间
 		// rcm.setDefaultExpiration(60);//秒
 		return rcm;
-		
 	}
 
 	/**

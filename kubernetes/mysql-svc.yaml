@@ -6,7 +6,7 @@ metadata:
     type: local
 spec: 
   capacity:
-    storage: 20Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -37,7 +37,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 1Gi
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -55,7 +55,7 @@ spec:
         tier: mysql
     spec:
       containers:
-      - image: mysql:5.7
+      - image: gcr.io/library/mysql
         name: mysql
         env:
         - name: MYSQL_DATABASE

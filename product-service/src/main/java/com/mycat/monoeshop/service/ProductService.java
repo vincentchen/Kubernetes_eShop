@@ -1,14 +1,13 @@
 package com.mycat.monoeshop.service;
 
-import java.util.List;
-
+import com.mycat.monoeshop.mapper.ProductMapper;
+import com.mycat.monoeshop.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mycat.monoeshop.mapper.ProductMapper;
-import com.mycat.monoeshop.model.Product;
+import java.util.List;
 
 /**
  * Desc:
@@ -31,7 +30,6 @@ public class ProductService {
     }
 
     public Product getProductById(Integer id) {
-       
         Product result=productMapper.getProductById(id);
         LOGGER.info("request for productId: {},founded {}", id,result!=null);
         return  result;
